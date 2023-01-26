@@ -1,11 +1,64 @@
-let operand = "";
+let firstOperand = "";
+let secondOperand = "";
+let currentOperation = null;
+let resetScreenState = false;
 
 const numberButtons = document.querySelectorAll("[data-number]");
-const operatorButtons = document.querySelectorAll("[data-operation]");
+const operatorButtons = document.querySelectorAll("[data-operator]");
 const equalsButton = document.querySelector("[data-equals]");
-const deleteButton = document.querySelector("[data-backspace]");
+const deleteButton = document.querySelector("[data-delete]");
 const clearButton = document.querySelector("[data-clear]");
 const operationScreen = document.getElementById("operand");
+
+deleteButton.addEventListener("click", backspace);
+clearButton.addEventListener("click", clearScreen);
+equalsButton.addEventListener("click", evaluate);
+
+numberButtons.forEach((button) =>
+  button.addEventListener("click", () => appendNumber(button.textContent))
+);
+
+operatorButtons.forEach((button) =>
+  button.addEventListener("click", () => setOperation(button.textContent))
+);
+
+function appendNumber(number) {
+  if (operationScreen.textContent === "0" || resetScreenState) resetScreen();
+  if (number === "." && operationScreen.textContent.includes(".")) return;
+  operationScreen.textContent += number;
+  resetScreenState = false;
+}
+
+function clearScreen() {
+  operationScreen.textContent = "0";
+}
+
+function resetScreen() {
+  operationScreen.textContent = "";
+}
+
+function backspace() {
+  operationScreen.textContent = operationScreen.textContent.slice(0, -1);
+}
+
+function setOperation(operator) {
+  firstOperand = operationScreen.textContent;
+  currentOperation = operator;
+  resetScreenState = true;
+}
+
+secondOperand = operationScreen.textContent;
+
+function evaluate() {
+  secondOperand = operationScreen.textContent;
+  operationScreen.textContent = roundResult(
+    operate(currentOperation, firstOperand, secondOperand)
+  );
+}
+
+function roundResult(number) {
+  return Math.round(number * 1000) / 1000;
+}
 
 function add(a, b) {
   return a + b;
@@ -23,36 +76,11 @@ function divide(a, b) {
   return a / b;
 }
 
-numberButtons.forEach((button) =>
-    button.addEventListener("click", () => appendNumber(button.textContent))
-)
-
-function appendNumber (number) {
-    if (operationScreen.textContent === '0') {
-        resetScreen()
-    }
-    if (number === '.' && operationScreen.textContent.includes('.')) return
-    operationScreen.textContent += number
-}
-function resetScreen() {
-    operationScreen.textContent = ''
-}
-
-function decimalCheck() {
-
-}
-
-operatorButtons.forEach((button) =>
-  button.addEventListener("click", () => setOperation(button.textContent))
-);
-
-function setOperation(operation) {}
-
-function operate(operation, a, b) {
+function operate(operator, a, b) {
   // switch; check for operation and return respective function
   a = Number(a);
   b = Number(b);
-  switch (operation) {
+  switch (operator) {
     case "+":
       return add(a, b);
     case "-":
