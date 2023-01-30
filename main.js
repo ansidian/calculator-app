@@ -47,7 +47,7 @@ function backspace() {
 
 function setOperation(operator) {
   if (firstOperand !== null && currentOperation !== null) {
-    chainOperation(currentOperation, firstOperand)
+    chainOperation(currentOperation, firstOperand);
     currentOperation = operator;
   } else {
     firstOperand = operationScreen.textContent;
@@ -61,10 +61,9 @@ function chainOperation(operator, a) {
   operationScreen.textContent = roundResult(
     operate(operator, a, secondOperand)
   );
-  firstOperand = operationScreen.textContent
-  currentOperation = operator;
+  firstOperand = operationScreen.textContent;
   resetScreenState = true;
-  secondOperand = operationScreen.textContent
+  secondOperand = operationScreen.textContent;
 }
 
 function evaluate() {
@@ -73,10 +72,15 @@ function evaluate() {
   operationScreen.textContent = roundResult(
     operate(currentOperation, firstOperand, secondOperand)
   );
+  currentOperation = null;
 }
 
 function roundResult(number) {
-  return Math.round(number * 1000) / 1000;
+  if (isFinite(Math.round(number * 1000) / 1000)) {
+    return Math.round(number * 1000) / 1000;
+  } else {
+    return (operationScreen.textContent = "lmao");
+  }
 }
 
 function add(a, b) {
@@ -110,3 +114,5 @@ function operate(operator, a, b) {
       return divide(a, b);
   }
 }
+
+function handleKeyboardInputs(e) {}
