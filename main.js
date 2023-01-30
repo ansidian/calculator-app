@@ -1,6 +1,7 @@
-let firstOperand = "";
-let secondOperand = "";
+let firstOperand = null;
+let secondOperand = null;
 let currentOperation = null;
+let secondOperation = null;
 let resetScreenState = false;
 
 const numberButtons = document.querySelectorAll("[data-number]");
@@ -31,6 +32,9 @@ function appendNumber(number) {
 
 function clearScreen() {
   operationScreen.textContent = "0";
+  firstOperand = null;
+  secondOperand = null;
+  currentOperation = null;
 }
 
 function resetScreen() {
@@ -44,13 +48,17 @@ function backspace() {
 function setOperation(operator) {
   firstOperand = operationScreen.textContent;
   currentOperation = operator;
+  if (secondOperand !== null && currentOperation !== null ) evaluate()
   resetScreenState = true;
 }
 
-secondOperand = operationScreen.textContent;
+//  function chainOperation(a, b, operator)
+/*
+ */
 
 function evaluate() {
   secondOperand = operationScreen.textContent;
+  if (currentOperation === null) return;
   operationScreen.textContent = roundResult(
     operate(currentOperation, firstOperand, secondOperand)
   );
