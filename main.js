@@ -46,15 +46,26 @@ function backspace() {
 }
 
 function setOperation(operator) {
-  firstOperand = operationScreen.textContent;
-  currentOperation = operator;
-  if (secondOperand !== null && currentOperation !== null ) evaluate()
-  resetScreenState = true;
+  if (firstOperand !== null && currentOperation !== null) {
+    chainOperation(currentOperation, firstOperand)
+    currentOperation = operator;
+  } else {
+    firstOperand = operationScreen.textContent;
+    currentOperation = operator;
+    resetScreenState = true;
+  }
 }
 
-//  function chainOperation(a, b, operator)
-/*
- */
+function chainOperation(operator, a) {
+  secondOperand = operationScreen.textContent;
+  operationScreen.textContent = roundResult(
+    operate(operator, a, secondOperand)
+  );
+  firstOperand = operationScreen.textContent
+  currentOperation = operator;
+  resetScreenState = true;
+  secondOperand = operationScreen.textContent
+}
 
 function evaluate() {
   secondOperand = operationScreen.textContent;
