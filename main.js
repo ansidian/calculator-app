@@ -16,6 +16,7 @@ clearButton.addEventListener("click", clearScreen);
 equalsButton.addEventListener("click", evaluate);
 window.addEventListener('keydown', handleKeyboardInputs)
 
+
 numberButtons.forEach((button) =>
   button.addEventListener("click", () => appendNumber(button.textContent))
 );
