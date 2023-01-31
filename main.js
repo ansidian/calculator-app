@@ -14,6 +14,7 @@ const operationScreen = document.getElementById("operand");
 deleteButton.addEventListener("click", backspace);
 clearButton.addEventListener("click", clearScreen);
 equalsButton.addEventListener("click", evaluate);
+window.addEventListener('keydown', handleKeyboardInputs)
 
 numberButtons.forEach((button) =>
   button.addEventListener("click", () => appendNumber(button.textContent))
@@ -115,4 +116,18 @@ function operate(operator, a, b) {
   }
 }
 
-function handleKeyboardInputs(e) {}
+function handleKeyboardInputs(e) {
+  if (e.key >= 0 && e.key <= 9) appendNumber(e.key)
+  if (e.key === '.') appendNumber(e.key)
+  if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') setOperation(convertOperation(e.key))
+  if (e.key === 'Enter' || e.key === '=') evaluate()
+  if (e.key === 'Delete') clearScreen()
+  if (e.key === 'Backspace') backspace()
+}
+
+function convertOperation(keyboardOperatorInput) {
+  if (keyboardOperatorInput === '/') return "÷"
+  if (keyboardOperatorInput === '*') return "×"
+  if (keyboardOperatorInput === '+') return "+"
+  if (keyboardOperatorInput === '-') return "-"
+}
