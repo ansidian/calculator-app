@@ -1,11 +1,9 @@
-
-
 html,
 body {
   height: 100%;
   box-sizing: border-box;
-  background-color: #D9AFD9;
-  background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+  background-color: #d9afd9;
+  background-image: linear-gradient(0deg, #d9afd9 0%, #97d9e1 100%);
 }
 
 .wrapper {
@@ -17,7 +15,7 @@ body {
   box-shadow: 0 4px 30px rgba (35, 35, 35, 0.1);
   color: #232323;
   backdrop-filter: blur(4px);
-  background: rgba(255, 255, 255, 0.30);
+  background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba (255, 255, 255, 0.34);
   height: auto;
   padding: 20px 20px;
@@ -29,11 +27,16 @@ body {
   align-items: center;
   justify-content: center;
   height: inherit;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   overflow: hidden;
 }
 
-.output {
+.prev-output {
+  font-size: 18px;
+  min-height: 22px;
+}
+
+.screen {
   backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(5.5px);
   background: rgba (255, 255, 255, 0.75);
@@ -45,10 +48,9 @@ body {
   overflow: hidden;
   padding: 20px;
   height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  flex-direction: column;
+  min-height: 64px;
+  /* display: flex; */
+  text-align: right;
   word-wrap: break-word;
   word-break: break-all;
 }
@@ -98,46 +100,20 @@ body {
   transform: translateZ(0px);
   transition: background 0.1s ease 0s, transform 0.1s ease 0s;
   border: none;
-  cursor: pointer
-} 
- 
+  cursor: pointer;
+}
+
 .calc-button:hover {
   transform: translate3d(0px, 8px, 0px);
   background-color: #05c1ff;
   color: inherit;
-} 
- 
-.calc-button::before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  width: 50%;
-  height: 8px;
-  transition: height 0.1s ease 0s, background 0.1s ease 0s;
-  left: 0px;
-  transform: skewX(45deg);
-  transform-origin: 100% 0px;
-} 
- 
-.calc-button::after {
-  right: 0px;
-  transform: skewX(-45deg);
-  transform-origin: 0px 0px;
-} 
- 
-.calc-button:hover::before {
-  height: 0px;
-} 
- 
-.calc-button {
-  background: rgb(61, 135, 255);
-} 
- 
+}
+
 .calc-button {
   background: rgb(35, 109, 230);
-} 
+}
 
- .footer {
+.footer {
   display: flex;
   align-items: center;
   justify-content: center;

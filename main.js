@@ -9,13 +9,13 @@ const operatorButtons = document.querySelectorAll("[data-operator]");
 const equalsButton = document.querySelector("[data-equals]");
 const deleteButton = document.querySelector("[data-delete]");
 const clearButton = document.querySelector("[data-clear]");
-const operationScreen = document.getElementById("operand");
+const currentOperationScreen = document.getElementById("operand");
+const previousOperationScreen = document.getElementById("prev-operand");
 
 deleteButton.addEventListener("click", backspace);
 clearButton.addEventListener("click", clearScreen);
 equalsButton.addEventListener("click", evaluate);
-window.addEventListener('keydown', handleKeyboardInputs)
-
+window.addEventListener("keydown", handleKeyboardInputs);
 
 numberButtons.forEach((button) =>
   button.addEventListener("click", () => appendNumber(button.textContent))
@@ -26,25 +26,31 @@ operatorButtons.forEach((button) =>
 );
 
 function appendNumber(number) {
-  if (operationScreen.textContent === "0" || resetScreenState) resetScreen();
-  if (number === "." && operationScreen.textContent.includes(".")) return;
-  operationScreen.textContent += number;
+  if (currentOperationScreen.textContent === "0" || resetScreenState)
+    resetScreen();
+  if (number === "." && currentOperationScreen.textContent.includes("."))
+    return;
+  currentOperationScreen.textContent += number;
   resetScreenState = false;
 }
 
 function clearScreen() {
-  operationScreen.textContent = "0";
+  currentOperationScreen.textContent = "0";
+  previousOperationScreen.textContent = " ";
   firstOperand = null;
   secondOperand = null;
   currentOperation = null;
 }
 
 function resetScreen() {
-  operationScreen.textContent = "";
+  currentOperationScreen.textContent = "";
 }
 
 function backspace() {
-  operationScreen.textContent = operationScreen.textContent.slice(0, -1);
+  currentOperationScreen.textContent = currentOperationScreen.textContent.slice(
+    0,
+    -1
+  );
 }
 
 function setOperation(operator) {
@@ -52,26 +58,32 @@ function setOperation(operator) {
     chainOperation(currentOperation, firstOperand);
     currentOperation = operator;
   } else {
-    firstOperand = operationScreen.textContent;
+    firstOperand = currentOperationScreen.textContent;
     currentOperation = operator;
     resetScreenState = true;
+    previousOperationScreen.textContent = `${firstOperand} ${currentOperation} `;
   }
 }
 
+function removeActiveOperation() {
+  operatorButtons.forEach((a) => a.classList.remove("active-"));
+}
+
 function chainOperation(operator, a) {
-  secondOperand = operationScreen.textContent;
-  operationScreen.textContent = roundResult(
+  secondOperand = currentOperationScreen.textContent;
+  currentOperationScreen.textContent = roundResult(
     operate(operator, a, secondOperand)
   );
-  firstOperand = operationScreen.textContent;
+  firstOperand = currentOperationScreen.textContent;
   resetScreenState = true;
-  secondOperand = operationScreen.textContent;
+  secondOperand = currentOperationScreen.textContent;
 }
 
 function evaluate() {
-  secondOperand = operationScreen.textContent;
+  secondOperand = currentOperationScreen.textContent;
   if (currentOperation === null) return;
-  operationScreen.textContent = roundResult(
+  previousOperationScreen.textContent = `${firstOperand} ${currentOperation} ${secondOperand} =`;
+  currentOperationScreen.textContent = roundResult(
     operate(currentOperation, firstOperand, secondOperand)
   );
   currentOperation = null;
@@ -81,7 +93,7 @@ function roundResult(number) {
   if (isFinite(Math.round(number * 1000) / 1000)) {
     return Math.round(number * 1000) / 1000;
   } else {
-    return (operationScreen.textContent = "lmao");
+    return (currentOperationScreen.textContent = "lmao");
   }
 }
 
@@ -118,17 +130,19 @@ function operate(operator, a, b) {
 }
 
 function handleKeyboardInputs(e) {
-  if (e.key >= 0 && e.key <= 9) appendNumber(e.key)
-  if (e.key === '.') appendNumber(e.key)
-  if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') setOperation(convertOperation(e.key))
-  if (e.key === 'Enter' || e.key === '=') evaluate()
-  if (e.key === 'Delete') clearScreen()
-  if (e.key === 'Backspace') backspace()
+  if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
+  if (e.key === ".") appendNumber(e.key);
+  if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/")
+    setOperation(convertOperation(e.key));
+  e.target.classList.add("active-operator");
+  if (e.key === "Enter" || e.key === "=") evaluate();
+  if (e.key === "Delete") clearScreen();
+  if (e.key === "Backspace") backspace();
 }
 
 function convertOperation(keyboardOperatorInput) {
-  if (keyboardOperatorInput === '/') return "÷"
-  if (keyboardOperatorInput === '*') return "×"
-  if (keyboardOperatorInput === '+') return "+"
-  if (keyboardOperatorInput === '-') return "-"
+  if (keyboardOperatorInput === "/") return "÷";
+  if (keyboardOperatorInput === "*") return "×";
+  if (keyboardOperatorInput === "+") return "+";
+  if (keyboardOperatorInput === "-") return "-";
 }

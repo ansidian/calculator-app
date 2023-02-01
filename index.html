@@ -1,62 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculator</title>
-    <link rel="stylesheet" href="style.css" />
-    <script
-      src="https://kit.fontawesome.com/4c536a6bd5.js"
-      crossorigin="anonymous"
-    ></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <section class="screen" id="textField">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/4c536a6bd5.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <section class="display" id="textField">
+      <div class="screen">
+        <div class="prev-output" id="prev-operand"></div>
         <div class="output" id="operand">0</div>
-      </section>
-      <section class="calc-buttons">
-        <div class="calc-button-row">
-          <button data-clear="clear" class="calc-button double">C</button>
-          <button data-delete="backspace" class="calc-button">&larr;</button>
-          <button data-operator="divide" class="calc-button">&divide;</button>
-        </div>
+      </div>
+    </section>
+    <section class="calc-buttons">
+      <div class="calc-button-row">
+        <button data-clear="clear" class="calc-button double">C</button>
+        <button data-delete="backspace" class="calc-button">&larr;</button>
+        <button data-operator="divide" class="calc-button">&divide;</button>
+      </div>
 
-        <div class="calc-button-row">
-          <button data-number class="calc-button">7</button>
-          <button data-number class="calc-button">8</button>
-          <button data-number class="calc-button">9</button>
-          <button data-operator="multiply" class="calc-button">&times;</button>
-        </div>
+      <div class="calc-button-row">
+        <button data-number class="calc-button">7</button>
+        <button data-number class="calc-button">8</button>
+        <button data-number class="calc-button">9</button>
+        <button data-operator="multiply" class="calc-button">&times;</button>
+      </div>
 
-        <div class="calc-button-row">
-          <button data-number class="calc-button">4</button>
-          <button data-number class="calc-button">5</button>
-          <button data-number class="calc-button">6</button>
-          <button data-operator="subtract" class="calc-button">-</button>
-        </div>
+      <div class="calc-button-row">
+        <button data-number class="calc-button">4</button>
+        <button data-number class="calc-button">5</button>
+        <button data-number class="calc-button">6</button>
+        <button data-operator="subtract" class="calc-button">-</button>
+      </div>
 
-        <div class="calc-button-row">
-          <button data-number class="calc-button">1</button>
-          <button data-number class="calc-button">2</button>
-          <button data-number class="calc-button">3</button>
-          <button data-operator="add" class="calc-button">&plus;</button>
-        </div>
+      <div class="calc-button-row">
+        <button data-number class="calc-button">1</button>
+        <button data-number class="calc-button">2</button>
+        <button data-number class="calc-button">3</button>
+        <button data-operator="add" class="calc-button">&plus;</button>
+      </div>
 
-        <div class="calc-button-row">
-          <button data-number class="calc-button double">0</button>
-          <button data-number="decimal" class="calc-button">.</button>
-          <button data-equals="equal" class="calc-button">&equals;</button>
-        </div>
-      </section>
-    </div>
-    <footer class="footer">
-        Andy Su ©
-        <a href="https://github.com/Wyspec/" target="_blank">
-          <i class="fab fa-github"></i></a>
-    </footer>
-    <script src="main.js"></script>
-  </body>
+      <div class="calc-button-row">
+        <button data-number class="calc-button double">0</button>
+        <button data-number="decimal" class="calc-button">.</button>
+        <button data-equals="equal" class="calc-button">&equals;</button>
+      </div>
+    </section>
+  </div>
+  <footer class="footer">
+    Andy Su ©
+    <a href="https://github.com/Wyspec/" target="_blank">
+      <i class="fab fa-github"></i></a>
+  </footer>
+  <script src="main.js"></script>
+</body>
+
 </html>
