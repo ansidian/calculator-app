@@ -1,7 +1,7 @@
 # calculator
 An online calculator with basic arithmetic operations built using HTML, CSS, and vanilla Javascript as part of The Odin Project [curriculum](https://www.theodinproject.com/lessons/foundations-calculator). It supports full keyboard input for all supported calculator functions as well as standard mouse clicks.
 
-**🔗 Live Preview: [Calculator](https://wyspec.github.io/calculator-app/)**
+**🔗 Live Preview: [Calculator](https://andsidian.github.io/calculator-app/)**
 
 ## Built with
 
